@@ -18,13 +18,19 @@ AxiosInstance.get(url)
       const html = response.data; // Получаю данные от сайта
       const $ = cheerio.load(html); 
       const Orders: cheerio.Cheerio = $('.vendor-reviews-item__container');
-      const feedback: feedbacks[] = [];
+      const feedbacklist: feedbacks[] = [];
       Orders.each((i,element) => {
-        const author = $(element).find('.vendor-reviews-item__username').text().replace(/\s\s+/g, '')
-        const feedback = $(element).find('.vendor-reviews-item__text').text().replace(/\s\s+/g, '')
-        const order = $(element).find('.vendor-reviews-item__order').text().replace(/\s\s+/g, '')
-        const rating = $(element).find('.vendor-reviews-item__icon').text().replace(/\s\s+/g, '')
-        console.log(`Автор: `+author,`\n Отзыв: `+feedback,`\n Рейтинг: `+rating,`\n Отзыв: `+order,`тест`);
+        const author = $(element).find('.vendor-reviews-item__username').text().replace(/\s\s+/g, '');
+        const feedback = $(element).find('.vendor-reviews-item__text').text().replace(/\s\s+/g, '');
+        const order = $(element).find('.vendor-reviews-item__order').text().replace(/\s\s+/g, '');
+        const rating = $(element).find('.vendor-reviews-item__icon').text().replace(/\s\s+/g, '');
+        feedbacklist.push({
+          author,
+          feedback,
+          order,
+          rating
+        })
+        console.log(feedbacklist);
       });
     }
   )
